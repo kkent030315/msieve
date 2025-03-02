@@ -36,6 +36,8 @@ CFLAGS = $(OPT_FLAGS) $(MACHINE_FLAGS) $(WARN_FLAGS) \
 
 # tweak the compile flags
 
+CFLAGS += -Wno-incompatible-pointer-types -Wno-implicit-function-declaration
+
 ifeq ($(ECM),1)
 	CFLAGS += -DHAVE_GMP_ECM
 	LIBS += -lecm
@@ -48,6 +50,7 @@ endif
 ifeq ($(CUDA),1)
 
 ifeq ($(WIN),1)
+	LDFLAGS += -static
 	CUDA_ROOT = $(shell echo $$CUDA_PATH)
 	NVCC = "$(CUDA_ROOT)/bin/nvcc"
 

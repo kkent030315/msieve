@@ -1239,7 +1239,7 @@ static v_t * block_lanczos_core(msieve_obj *obj,
 
 				fprintf(stderr, "linear algebra completed %u "
 					"of %u dimensions (%1.1f%%, ETA "
-					"%dh%2dm)    \r",
+					"%dh%2dm)    \n",
 					dim_solved, max_n, 100.0 * dim_solved / 
 					max_n, eta / 3600, (eta % 3600) / 60);
 

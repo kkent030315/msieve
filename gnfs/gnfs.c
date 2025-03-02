@@ -42,7 +42,17 @@ static void get_sieve_params(uint32 bits, sieve_param_t *params);
 
 static uint32 nfs_init_savefile(msieve_obj *obj, mpz_t n);
 
-/*--------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+
+Modification to msieve version 1.52
+
+Method: factor_gnfs()
+
+The only modification is to call nfs_find_factors_threaded() instead
+of nfs_find_factors().
+
+-------------------------------------------------------------------*/
+
 uint32 factor_gnfs(msieve_obj *obj, mp_t *input_n,
 			factor_list_t *factor_list) {
 
@@ -165,7 +175,7 @@ uint32 factor_gnfs(msieve_obj *obj, mp_t *input_n,
 		nfs_solve_linear_system(obj, n);
 		
 	if (obj->flags & MSIEVE_FLAG_NFS_SQRT)
-		factor_found = nfs_find_factors(obj, n, factor_list);
+		factor_found = nfs_find_factors_threaded(obj, n, factor_list);
 
 finished:
 	mpz_poly_free(&rat_poly);
